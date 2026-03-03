@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>我的学习项目</title>
+    
 </head>
 
 <body>
 
-<h1>Hello World</h1>
+<h1>你好王汐月！！</h1>
 
 <form>
 <input placeholder="用户名">
@@ -23,6 +25,40 @@
 
 function showMessage(){
     alert("你好，欢迎学习前端！")
+}
+
+</script>
+
+<h2>文件上传下载 Demo</h2>
+
+<!-- 上传 -->
+<input type="file" id="fileInput">
+<button onclick="uploadFile()">上传文件</button>
+
+<br><br>
+
+<!-- 下载 -->
+<button onclick="downloadFile()">下载文件</button>
+
+<script>
+
+async function uploadFile(){
+
+    const file = document.getElementById("fileInput").files[0]
+
+    let formData = new FormData()
+    formData.append("file", file)
+
+    await fetch("http://127.0.0.1:8000/upload",{
+        method:"POST",
+        body:formData
+    })
+
+    alert("上传成功")
+}
+
+function downloadFile(){
+    window.open("http://127.0.0.1:8000/download/test.txt")
 }
 
 </script>
