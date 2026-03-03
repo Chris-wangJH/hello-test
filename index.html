@@ -1,9 +1,203 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Hello1234 Site</title>
-</head>
-<body>
-    <h1>Hello World</h1>
-</body>
-</html>
+1	<!DOCTYPE html>
+     2	<html lang="zh-CN">
+     3	<head>
+     4	    <meta charset="UTF-8" />
+     5	    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     6	    <title>CRM 后台 - 客户列表</title>
+     7	    <style>
+     8	        :root {
+     9	            --bg: #f5f7fb;
+    10	            --card: #ffffff;
+    11	            --text: #1f2a44;
+    12	            --muted: #667085;
+    13	            --primary: #2563eb;
+    14	            --border: #e5e7eb;
+    15	            --ok: #16a34a;
+    16	            --warn: #f59e0b;
+    17	            --danger: #dc2626;
+    18	        }
+    19	
+    20	        * { box-sizing: border-box; }
+    21	
+    22	        body {
+    23	            margin: 0;
+    24	            font-family: "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+    25	            background: var(--bg);
+    26	            color: var(--text);
+    27	        }
+    28	
+    29	        .container {
+    30	            max-width: 1100px;
+    31	            margin: 40px auto;
+    32	            padding: 0 16px;
+    33	        }
+    34	
+    35	        .header {
+    36	            display: flex;
+    37	            justify-content: space-between;
+    38	            align-items: center;
+    39	            margin-bottom: 20px;
+    40	        }
+    41	
+    42	        .title {
+    43	            margin: 0;
+    44	            font-size: 28px;
+    45	            font-weight: 700;
+    46	        }
+    47	
+    48	        .subtitle {
+    49	            margin: 6px 0 0;
+    50	            color: var(--muted);
+    51	            font-size: 14px;
+    52	        }
+    53	
+    54	        .btn {
+    55	            border: 0;
+    56	            background: var(--primary);
+    57	            color: #fff;
+    58	            padding: 10px 14px;
+    59	            border-radius: 8px;
+    60	            font-size: 14px;
+    61	            cursor: pointer;
+    62	        }
+    63	
+    64	        .card {
+    65	            background: var(--card);
+    66	            border: 1px solid var(--border);
+    67	            border-radius: 12px;
+    68	            overflow: hidden;
+    69	        }
+    70	
+    71	        table {
+    72	            width: 100%;
+    73	            border-collapse: collapse;
+    74	        }
+    75	
+    76	        thead {
+    77	            background: #f8fafc;
+    78	        }
+    79	
+    80	        th, td {
+    81	            text-align: left;
+    82	            padding: 14px 16px;
+    83	            border-bottom: 1px solid var(--border);
+    84	            font-size: 14px;
+    85	        }
+    86	
+    87	        th { color: #334155; font-weight: 600; }
+    88	
+    89	        tbody tr:hover {
+    90	            background: #f8fafc;
+    91	        }
+    92	
+    93	        .tag {
+    94	            display: inline-block;
+    95	            padding: 4px 10px;
+    96	            border-radius: 999px;
+    97	            font-size: 12px;
+    98	            font-weight: 600;
+    99	        }
+   100	
+   101	        .active { background: #dcfce7; color: var(--ok); }
+   102	        .follow { background: #fef3c7; color: var(--warn); }
+   103	        .lost { background: #fee2e2; color: var(--danger); }
+   104	
+   105	        .footer {
+   106	            display: flex;
+   107	            justify-content: space-between;
+   108	            align-items: center;
+   109	            padding: 14px 16px;
+   110	            color: var(--muted);
+   111	            font-size: 13px;
+   112	        }
+   113	
+   114	        .pager span {
+   115	            margin: 0 4px;
+   116	            padding: 4px 8px;
+   117	            border-radius: 6px;
+   118	            border: 1px solid transparent;
+   119	        }
+   120	
+   121	        .pager .current {
+   122	            border-color: var(--primary);
+   123	            color: var(--primary);
+   124	            font-weight: 600;
+   125	        }
+   126	    </style>
+   127	</head>
+   128	<body>
+   129	    <main class="container">
+   130	        <section class="header">
+   131	            <div>
+   132	                <h1 class="title">客户列表</h1>
+   133	                <p class="subtitle">CRM 后台 · 当前共 8 位客户</p>
+   134	            </div>
+   135	            <button class="btn" type="button">+ 新建客户</button>
+   136	        </section>
+   137	
+   138	        <section class="card">
+   139	            <table aria-label="客户列表">
+   140	                <thead>
+   141	                    <tr>
+   142	                        <th>客户名称</th>
+   143	                        <th>联系人</th>
+   144	                        <th>手机号</th>
+   145	                        <th>来源渠道</th>
+   146	                        <th>最近跟进</th>
+   147	                        <th>状态</th>
+   148	                    </tr>
+   149	                </thead>
+   150	                <tbody>
+   151	                    <tr>
+   152	                        <td>杭州云途科技有限公司</td>
+   153	                        <td>李晨</td>
+   154	                        <td>138****1203</td>
+   155	                        <td>官网咨询</td>
+   156	                        <td>2026-02-25</td>
+   157	                        <td><span class="tag active">合作中</span></td>
+   158	                    </tr>
+   159	                    <tr>
+   160	                        <td>深圳明达供应链</td>
+   161	                        <td>王颖</td>
+   162	                        <td>139****7621</td>
+   163	                        <td>销售外呼</td>
+   164	                        <td>2026-02-23</td>
+   165	                        <td><span class="tag follow">待跟进</span></td>
+   166	                    </tr>
+   167	                    <tr>
+   168	                        <td>上海星澜教育</td>
+   169	                        <td>赵宇</td>
+   170	                        <td>136****4432</td>
+   171	                        <td>线下活动</td>
+   172	                        <td>2026-02-21</td>
+   173	                        <td><span class="tag active">合作中</span></td>
+   174	                    </tr>
+   175	                    <tr>
+   176	                        <td>北京鸿瑞医疗</td>
+   177	                        <td>陈欣</td>
+   178	                        <td>137****5518</td>
+   179	                        <td>渠道推荐</td>
+   180	                        <td>2026-02-16</td>
+   181	                        <td><span class="tag lost">已流失</span></td>
+   182	                    </tr>
+   183	                    <tr>
+   184	                        <td>成都创想传媒</td>
+   185	                        <td>孙浩</td>
+   186	                        <td>150****8290</td>
+   187	                        <td>微信公众号</td>
+   188	                        <td>2026-02-12</td>
+   189	                        <td><span class="tag follow">待跟进</span></td>
+   190	                    </tr>
+   191	                </tbody>
+   192	            </table>
+   193	            <div class="footer">
+   194	                <span>显示 1-5 条，共 8 条</span>
+   195	                <div class="pager" aria-label="分页">
+   196	                    <span class="current">1</span>
+   197	                    <span>2</span>
+   198	                </div>
+   199	            </div>
+   200	        </section>
+   201	    </main>
+   202	</body>
+   203	</html>
